@@ -1,12 +1,17 @@
 import { Navbar } from "@/components/atoms/Navebar/Navebar";
+import JobAd from "@/components/organisms/homePageCards/jobAd";
+import LinkedInPost from "@/components/organisms/homePageCards/linkedInPost";
+import ProfileCard from "@/components/organisms/homePageCards/profileCard";
 
 export const Home = () => {
   return (
     <div className=" h-screen w-screen flex flex-col">
       <Navbar />
-      <div className="flex-1 p-4">
-        <p className="text-3xl font-bold">Welcome to my website</p>
-      </div>
+     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+      <div><ProfileCard /></div>
+      <div><LinkedInPost /></div>
+      <div><JobAd /></div>
+    </div>
     </div>
   );
 };
