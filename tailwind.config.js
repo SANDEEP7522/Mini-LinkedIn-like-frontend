@@ -13,8 +13,8 @@ export default {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
 			  slack:{
-				DEFAULT: '#5c3858',
-				slacks: '###d1d5db',		
+				DEFAULT: '#d1d4da',
+				slacks: '#d1d5db',		
 			}, 
 			glassi: {
 				DEFAULT: 'rgba(255, 255, 255, 0.2)', // light glass
