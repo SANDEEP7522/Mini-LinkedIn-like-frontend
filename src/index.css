@@ -90,4 +90,91 @@ body {
   }
 }
 
+.myButton {
+	box-shadow: 3px 4px 0px 0px #899599;
+	background:linear-gradient(to bottom, #ededed 5%, #b1a0b1 100%);
+	background-color:#ededed;
+	border-radius:12px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#3a8a9e;
+	font-family:Arial;
+	font-size:17px;
+  margin-top: 10px;
+	padding:6px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
 
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.gradient-border {
+  --borderWidth: 3px;
+  position: relative;
+  background: #fff;
+  border-radius: var(--borderWidth);
+  z-index: 1;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #ce8e81,
+    #ee0749,
+    #d1a4d8,
+    #628fe9,
+    #8dd9e4,
+    #07b39b,
+    #6fba82
+  );
+  border-radius: calc(1 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.myButton {
+  background-color: #8f9fc2;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background 2s;
+  border: none;
+  cursor: pointer;
+}
+
+.myButton:hover {
+  background-color: #1e40af;
+}

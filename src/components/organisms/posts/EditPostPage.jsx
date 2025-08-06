@@ -1,6 +1,7 @@
 
 import axios from "@/config/axiosConfig";
 import { useUpdatePost } from "@/hooks/apis/post/useUpdatePost";
+import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -68,9 +69,9 @@ const EditPostPage = () => {
       <button
         type="submit"
         disabled={isPending}
-        className="bg-green-600 text-white px-4 py-2 rounded"
+        className="myButton"
       >
-        {isPending ? "Updating..." : "Update Post"}
+        {isPending ? <Loader className="animate-spin text-black" /> : "Update Post"}
       </button>
     </form>
   );

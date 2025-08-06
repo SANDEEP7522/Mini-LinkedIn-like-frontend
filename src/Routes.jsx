@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/molecules/ProtectedRoute/ProtectedR
 import { Home } from "./pages/Home/Home";
 import PostDetails from "./components/organisms/posts/postDetails";
 import EditPostPage from "./components/organisms/posts/EditPostPage";
+import JobsPage from "./components/organisms/jobes/JobsPage";
 
 export const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ export const AppRoutes = () => {
         <Route path="/auth/reset/:token" element={<Auth><ResetPasswordCard /></Auth>} />
         <Route path="/posts/:id" element={<PostDetails />} />
         <Route path="/posts/edit/:postId" element={<EditPostPage />} />
+        <Route path="/posts/jobs" element={<JobsPage />} />
 
 
         <Route path="/*" element={<NotFound />} />

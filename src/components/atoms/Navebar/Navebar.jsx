@@ -2,7 +2,6 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
@@ -35,7 +34,7 @@ export const Navbar = () => {
       icon: <Users className="h-4 w-4" />,
       label: "Employees",
     },
-    { to: "/jobs", icon: <Briefcase className="h-4 w-4" />, label: "Jobs" },
+    { to: "/posts/jobs", icon: <Briefcase className="h-4 w-4" />, label: "Jobs" },
     {
       to: "/messages",
       icon: <MessageSquare className="h-4 w-4" />,

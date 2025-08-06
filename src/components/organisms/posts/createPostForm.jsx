@@ -1,4 +1,5 @@
 import { useCreatePost } from "@/hooks/apis/post/useCreatePost";
+import { LoaderPinwheel } from "lucide-react";
 import { useState } from "react";
 
 const CreatePostForm = () => {
@@ -38,9 +39,9 @@ const CreatePostForm = () => {
       <button
         type="submit"
         disabled={isPending}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className='myButton'
       >
-        {isPending ? "Posting..." : "Post"}
+        {isPending ? <LoaderPinwheel className="animate-spin text-black" /> : "Post"}
       </button>
     </form>
   );
