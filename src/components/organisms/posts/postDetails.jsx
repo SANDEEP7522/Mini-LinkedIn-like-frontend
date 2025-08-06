@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Trash2, EditIcon, MoreVertical } from "lucide-react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { Trash2, MoreVertical, Edit2Icon } from "lucide-react";
 
 import { Navbar } from "@/components/atoms/Navebar/Navebar";
 import PostLoader from "@/components/molecules/loders/PostLoader";
@@ -22,17 +22,16 @@ const PostDetails = () => {
   const { post, loading, error } = useSinglePost(id);
   const [isEditing, setIsEditing] = useState(false);
 
-const { handleDeletePost, isDeleting } = useDeletePost();
+  const { handleDeletePost, isDeleting } = useDeletePost();
 
-const onDelete = async () => {
-  try {
-    await handleDeletePost(id);
-    navigate("/home");
-  } catch (error) {
-    console.error("Delete failed:", error);
-  }
-};
-
+  const onDelete = async () => {
+    try {
+      await handleDeletePost(id);
+      navigate("/home");
+    } catch (error) {
+      console.error("Delete failed:", error);
+    }
+  };
 
   if (loading)
     return (
@@ -67,8 +66,10 @@ const onDelete = async () => {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setIsEditing(true)}>
-                <EditIcon className="h-4 w-4 mr-2" /> Edit
+              <DropdownMenuItem asChild>
+                <Link to={`/posts/edit/${post._id}`}>
+                  <Edit2Icon className="h-4 w-4 mr-2" /> Edit
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={onDelete} disabled={isDeleting}>
                 <Trash2 className="h-4 w-4 mr-2 text-red-500" />

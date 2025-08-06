@@ -9,6 +9,7 @@ import { NotFound } from "./pages/NotFound/NoteFound";
 import { ProtectedRoute } from "./components/molecules/ProtectedRoute/ProtectedRoute";
 import { Home } from "./pages/Home/Home";
 import PostDetails from "./components/organisms/posts/postDetails";
+import EditPostPage from "./components/organisms/posts/EditPostPage";
 
 export const AppRoutes = () => {
   return (
@@ -19,8 +20,10 @@ export const AppRoutes = () => {
         <Route path="/home" element={<ProtectedRoute><Auth><Home /></Auth></ProtectedRoute>} />
         <Route path="/auth/forget" element={<Auth><ForgetPassword /></Auth>} />
         <Route path="/auth/reset/:token" element={<Auth><ResetPasswordCard /></Auth>} />
-       <Route path="/posts/:id" element={<PostDetails />} />
-  
+        <Route path="/posts/:id" element={<PostDetails />} />
+        <Route path="/posts/edit/:postId" element={<EditPostPage />} />
+
+
         <Route path="/*" element={<NotFound />} />
       </Routes>
   );

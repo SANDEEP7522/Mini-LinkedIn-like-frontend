@@ -40,15 +40,24 @@ export const getPostById = async (postId) => {
     throw error;
   }
 };
-export const updatePost = async (postId, updatedData) => {
+
+export const updatePost = async (postId, formData) => {
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await axios.put(`/posts/${postId}`, updatedData);
+    const response = await axios.put(`/posts/${postId}`, formData, {
+      headers: {
+        "x-auth-token": token,
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("updatePost error:", error);
     throw error;
   }
 };
+
 
 export const deletePost = async (postId, token) => {
   try {
