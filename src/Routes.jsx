@@ -8,7 +8,7 @@ import { ResetPasswordCard } from "@/components/organisms/Auth/ResetPasswordCard
 import { NotFound } from "./pages/NotFound/NoteFound";
 import { ProtectedRoute } from "./components/molecules/ProtectedRoute/ProtectedRoute";
 import { Home } from "./pages/Home/Home";
-import PostDetails from "./components/organisms/homePageCards/postDetails";
+import PostDetails from "./components/organisms/posts/postDetails";
 
 export const AppRoutes = () => {
   return (

@@ -9,7 +9,7 @@ const CreatePostForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("title", e.target.title.value);
+    // formData.append("title", e.target.title.value);
     formData.append("content", e.target.content.value);
     if (image) {
       formData.append("image", image); // backend should handle 'image' field
@@ -20,9 +20,13 @@ const CreatePostForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input type="text" name="title" placeholder="Title" required className="border p-2 w-full" />
-      <textarea name="content" placeholder="Write something..." required className="border p-2 w-full" />
-
+      <input
+        type="text"
+        name="content"
+        placeholder="Write something..."
+        required
+        className="border p-2 w-full"
+      />
       <input
         type="file"
         name="image"
@@ -31,7 +35,11 @@ const CreatePostForm = () => {
         className="block"
       />
 
-      <button type="submit" disabled={isPending} className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        disabled={isPending}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
         {isPending ? "Posting..." : "Post"}
       </button>
     </form>
