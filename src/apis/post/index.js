@@ -9,7 +9,7 @@ export const createPost = async (formData) => {
   try {
     const response = await axios.post("/posts/create", formData, {
       headers: {
-        "x-auth-token": token, // ✅ Header
+        "x-auth-token": token, 
         "Content-Type": "multipart/form-data",
       },
     });
@@ -58,8 +58,8 @@ export const updatePost = async (postId, formData) => {
   }
 };
 
-
-export const deletePost = async (postId, token) => {
+export const deletePost = async (postId) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await axios.delete(`/posts/${postId}`, {
       headers: {

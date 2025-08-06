@@ -54,11 +54,12 @@ export const loginUser = async ({ email, password }) => {
 export const forgetPassword = async ({ email }) => {
   try {
     const response = await axios.post("/users/password/forget", {
-  email,
+  email
     }, {
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
