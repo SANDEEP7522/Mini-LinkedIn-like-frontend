@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/atoms/Navebar/Navebar";
+import PostLoader from "@/components/molecules/loders/PostLoader";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useSinglePost } from "@/hooks/apis/post/useSinglePost";
 import { AvatarFallback } from "@radix-ui/react-avatar";
@@ -8,7 +9,12 @@ const PostDetails = () => {
   const { id } = useParams();
   const { post, loading, error } = useSinglePost(id);
 
-  if (loading) return <p className="text-center">Loading post...</p>;
+  if (loading)
+    return (
+      <p className="text-center">
+        {loading ? <PostLoader /> : <PostCard post={post} />}
+      </p>
+    );
   if (error || !post)
     return <p className="text-center text-red-500">Post not found.</p>;
 
@@ -39,7 +45,7 @@ const PostDetails = () => {
               {post.createdAt}
             </span>
           </div>
-        </div>    
+        </div>
         {post.imageUrl && (
           <img
             src={post.imageUrl}
