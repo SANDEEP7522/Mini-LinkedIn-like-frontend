@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CreatePostForm from "../posts/createPostForm";
 import { useAllPosts } from "@/hooks/apis/post/allPosts";
+import { Link } from "react-router-dom";
 
 const LinkedInPost = () => {
   const { posts, loading, error } = useAllPosts();
@@ -75,13 +76,15 @@ const LinkedInPost = () => {
                       </span>
                     </div>
                   </div>
-                  {post.imageUrl && (
-                    <img
-                      src={post.imageUrl}
-                      alt="Post"
-                      className="w-full max-h-72 object-cover mt-4 rounded-md"
-                    />
-                  )}
+                  <Link to={`/posts/${post._id}`}>
+                    {post.imageUrl && (
+                      <img
+                        src={post.imageUrl}
+                        alt="Post"
+                        className="w-full max-h-72 object-cover mt-4 rounded-md"
+                      />
+                    )}
+                  </Link>
                 </li>
               ))}
             </ul>

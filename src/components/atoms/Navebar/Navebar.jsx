@@ -86,6 +86,7 @@ export const Navbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <DropdownMenuItem disabled>{auth?.user?.name}</DropdownMenuItem>
               <DropdownMenuItem disabled>{auth?.user?.email}</DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/profile">Profile</Link>

@@ -10,6 +10,7 @@ export const useAllPosts = () => {
     const fetchPosts = async () => {
       try {
         const data = await getAllPosts();
+        console.log('fetchPosts  data', data);
         setPosts(data);
       } catch (err) {
         setError(err);
