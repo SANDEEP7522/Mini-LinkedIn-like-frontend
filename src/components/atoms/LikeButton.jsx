@@ -4,7 +4,7 @@ const LikeButton = ({ postId, isLiked }) => {
   const { mutate, isLoading } = useLikePost(postId);
 
   return (
-    <div className="flex items-center gap-2 ">
+    <div className="flex items-center gap-2 mt[-2]">
       <button
         onClick={() => mutate()}
         disabled={isLoading}

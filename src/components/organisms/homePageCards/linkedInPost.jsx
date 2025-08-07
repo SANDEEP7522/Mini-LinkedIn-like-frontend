@@ -5,9 +5,18 @@ import CreatePostForm from "../posts/createPostForm";
 import { useAllPosts } from "@/hooks/apis/post/allPosts";
 import { Link } from "react-router-dom";
 import LikeButton from "@/components/atoms/LikeButton";
+import CommentForm from "@/components/atoms/CommentForm";
+import { useState } from "react";
+import CommentList from "@/components/atoms/CommentList";
 
 const LinkedInPost = ({ user }) => {
   const { posts, loading, error } = useAllPosts();
+
+  const [showCommentForm, setShowCommentForm] = useState(false);
+
+  const handleOpenComment = () => {
+    setShowCommentForm((prev) => !prev);
+  };
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-slack dark:bg-zinc-900">
@@ -89,35 +98,45 @@ const LinkedInPost = ({ user }) => {
                   </Link>
 
                   <div className="mt-4 flex flex-col gap-2 bg-gray-100 w-full p-4 border rounded-md  ">
-                    
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-gray-500 dark:text-zinc-400">
                         {post.likes?.length || 0} likes
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-6 text-gray-500 dark:text-zinc-400 border-t pt-2 ">
-                     
+                    <div className="flex items-center gap-6 text-gray-500 dark:text-zinc-400 border-t pt-0 ">
                       <LikeButton
                         postId={post._id}
                         isLiked={post.likes?.includes(user?._id)}
                       />
-
-                      
-                      {/* <button
-                        onClick={() => handleOpenComment(post._id)}
-                        className="hover:text-blue-600 transition"
-                      >
-                        💬 Comment
-                      </button>
-
-                      
-                      <BookmarkButton
+                      <div className="border p-0 rounded mb-0">
+                        <button
+                          onClick={handleOpenComment}
+                          className="hover:text-blue-600 transition mt-0"
+                        >
+                          💬 Comment
+                        </button>
+                      </div>
+                      {/* <BookmarkButton
                         postId={post._id}
                         isBookmarked={post.bookmarks?.includes(user?._id)}
-                      /> */}
-
-                      
+                      />{" "}
+                       */}
+                    </div>
+                    <div>
+                      {showCommentForm && (
+                        <CommentForm
+                          postId={post._id}
+                          onCommentAdded={(comment) => {
+                            // Optional: do something when comment added
+                            setShowCommentForm(false); // auto-close if you want
+                          }}
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <h6 className="font-semibold">Comments:</h6>
+                       <CommentList postId={post._id} />
                     </div>
                   </div>
                 </li>

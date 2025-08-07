@@ -94,3 +94,36 @@ export const likePost = async (postId, token) => {
   }
 };
 
+// src/apis/post.js
+
+export const postComment = async (postId, text, token) => {
+  try {
+    const res = await axios.post(
+      `/comment/${postId}`,
+      { postId, text },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error(
+      "Error while posting comment:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
+
+export const getAllComments = async (postId) => {
+  try {
+    const response = await axios.get(`comments/${postId}`);
+    return response.data.comments;
+  } catch (error) {
+    console.error("getAllComments error:", error);
+    throw error;
+  }
+};
