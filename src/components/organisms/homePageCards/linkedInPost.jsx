@@ -4,8 +4,9 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CreatePostForm from "../posts/createPostForm";
 import { useAllPosts } from "@/hooks/apis/post/allPosts";
 import { Link } from "react-router-dom";
+import LikeButton from "@/components/atoms/LikeButton";
 
-const LinkedInPost = () => {
+const LinkedInPost = ({ user }) => {
   const { posts, loading, error } = useAllPosts();
 
   return (
@@ -47,6 +48,7 @@ const LinkedInPost = () => {
                   key={post._id}
                   className="p-4 border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition bg-white dark:bg-zinc-800"
                 >
+                  {console.log("post", post)}
                   <div className="flex items-start space-x-4">
                     <Avatar className="mb-3">
                       <AvatarImage
@@ -85,10 +87,53 @@ const LinkedInPost = () => {
                       />
                     )}
                   </Link>
+
+                  <div className="mt-4 flex flex-col gap-2 bg-gray-100 w-full p-4 border rounded-md  ">
+                    
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-500 dark:text-zinc-400">
+                        {post.likes?.length || 0} likes
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-6 text-gray-500 dark:text-zinc-400 border-t pt-2 ">
+                     
+                      <LikeButton
+                        postId={post._id}
+                        isLiked={post.likes?.includes(user?._id)}
+                      />
+
+                      
+                      {/* <button
+                        onClick={() => handleOpenComment(post._id)}
+                        className="hover:text-blue-600 transition"
+                      >
+                        💬 Comment
+                      </button>
+
+                      
+                      <BookmarkButton
+                        postId={post._id}
+                        isBookmarked={post.bookmarks?.includes(user?._id)}
+                      /> */}
+
+                      
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
           )}
+
+          <div className="mt-4 flex justify-between items-center">
+            <LikeButton
+              postId={posts._id}
+              isLiked={posts.likes?.includes(user._id)}
+            />
+            <span className="text-sm text-gray-500 dark:text-zinc-400">
+              {posts.likes?.length || 0} likes
+            </span>
+          </div>
         </div>
 
         {/* Right Sidebar - Job Ads */}

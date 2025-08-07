@@ -9,7 +9,7 @@ export const createPost = async (formData) => {
   try {
     const response = await axios.post("/posts/create", formData, {
       headers: {
-        "x-auth-token": token, 
+        "x-auth-token": token,
         "Content-Type": "multipart/form-data",
       },
     });
@@ -72,3 +72,25 @@ export const deletePost = async (postId) => {
     throw error;
   }
 };
+
+export const likePost = async (postId, token) => {
+  try {
+    const res = await axios.patch(
+      `/like/${postId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error(
+      "Error while liking post:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
