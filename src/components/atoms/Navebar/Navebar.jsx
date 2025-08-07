@@ -35,7 +35,7 @@ export const Navbar = () => {
   };
 
   const navItems = [
-    { to: "/home", icon: <Home className="h-4 w-4" />, label: "Home" },
+    { to: "/", icon: <Home className="h-4 w-4" />, label: "Home" },
     {
       to: "/employees",
       icon: <Users className="h-4 w-4" />,
@@ -57,7 +57,7 @@ export const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="px-4 lg:px-10 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/home" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
             alt="LinkedIn"

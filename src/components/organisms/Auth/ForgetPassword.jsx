@@ -43,6 +43,7 @@ export const ForgetPassword = () => {
   }, [isSuccess]);
 
   return (
+    <div className="h-screen w-screen flex justify-center items-center" >
     <Card className="glass-card">
       <CardHeader className="flex items-center justify-center">
         <CardTitle className="text-3xl">Forget Password</CardTitle>
@@ -94,5 +95,6 @@ export const ForgetPassword = () => {
         </div>
       </form>
     </Card>
+    </div>
   );
 };

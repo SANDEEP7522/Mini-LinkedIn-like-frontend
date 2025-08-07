@@ -19,7 +19,7 @@ export const AppRoutes = () => {
         <Route path="/auth/signup" element={<Auth> <SignupContainer /> </Auth>} />
         <Route path="/auth/code" element={<Auth><CodeContainer />  </Auth>} />
         <Route path="/auth/signin" element={<Auth> <SigninContainer /> </Auth>} />
-        <Route path="/home" element={<ProtectedRoute><Auth><Home /></Auth></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><Auth><Home /></Auth></ProtectedRoute>} />
         <Route path="/auth/forget" element={<Auth><ForgetPassword /></Auth>} />
         <Route path="/auth/reset/:token" element={<Auth><ResetPasswordCard /></Auth>} />
         <Route path="/posts/:id" element={<PostDetails />} />

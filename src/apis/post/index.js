@@ -10,8 +10,8 @@ export const createPost = async (formData) => {
     const response = await axios.post("/posts/create", formData, {
       headers: {
         "x-auth-token": token,
-        "Content-Type": "multipart/form-data",
       },
+      withCredentials: true,
     });
     console.log("createPost response:", response.data);
     return response.data;

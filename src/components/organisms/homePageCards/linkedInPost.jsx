@@ -22,32 +22,31 @@ const LinkedInPost = ({ user }) => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-slack dark:bg-zinc-900">
-      {/* Layout */}
+    <div className="min-h-screen w-full flex flex-col bg-slack dark:bg-zinc-900 relative">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 md:px-8 py-6">
-        {/* Left Sidebar - Profile */}
-        <div className=" hidden md:block md:col-span-3">
-          <div className="p-4 bg-white dark:bg-zinc-800 shadow rounded-xl w-full">
-            <Avatar className="mb-3">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <h2 className="font-semibold">Sandeep Kumar Sahu</h2>
-            <p className="text-sm text-zinc-500">
-              Full-Stack Developer (Frontend & Backend)
-            </p>
-            <p className="text-xs mt-1 text-zinc-400">
-              Prayagraj, Uttar Pradesh
-            </p>
+        {/* Left Sidebar - Fixed on Desktop */}
+        <div className="hidden md:block md:col-span-3">
+          <div className="fixed top-24 left-8 w-[260px]">
+            <div className="p-4 bg-white dark:bg-zinc-800 shadow rounded-xl w-full">
+              <Avatar className="mb-3">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <h2 className="font-semibold">Sandeep Kumar Sahu</h2>
+              <p className="text-sm text-zinc-500">Full-Stack Developer</p>
+              <p className="text-xs mt-1 text-zinc-400">
+                Prayagraj, Uttar Pradesh
+              </p>
 
-            <div className="px-4 mt-4">
-              <CreatePostForm />
+              <div className="px-4 mt-4">
+                <CreatePostForm />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Main Feed */}
-        <div className="col-span-1 md:col-span-6">
+        <div className="col-span-1 md:col-span-6 mr-4">
           <CreatePostCard />
           <div className="mt-4">
             {loading ? (
@@ -182,15 +181,17 @@ const LinkedInPost = ({ user }) => {
 
         {/* Right Sidebar - Job Ads */}
         <div className="hidden md:block md:col-span-3">
-          <div className="p-4 bg-white dark:bg-zinc-800 shadow rounded-xl w-full">
-            <h3 className="text-lg font-semibold mb-2">
-              See who's hiring on LinkedIn
-            </h3>
-            <img
-              src="https://marketplace.canva.com/EAF6WBufBtU/1/0/1131w/canva-blue-white-minimalist-hiring-poster-fH9LmxEQi7M.jpg"
-              alt="Job Ad"
-              className="w-full rounded-md"
-            />
+          <div className="fixed top-24 right-8 w-[260px]">
+            <div className="p-4 bg-white dark:bg-zinc-800 shadow rounded-xl w-full">
+              <h3 className="text-lg font-semibold mb-2">
+                See who's hiring on LinkedIn
+              </h3>
+              <img
+                src="https://marketplace.canva.com/EAF6WBufBtU/1/0/1131w/canva-blue-white-minimalist-hiring-poster-fH9LmxEQi7M.jpg"
+                alt="Job Ad"
+                className="w-full rounded-md"
+              />
+            </div>
           </div>
         </div>
       </div>
