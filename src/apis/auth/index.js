@@ -53,14 +53,18 @@ export const loginUser = async ({ email, password }) => {
 
 export const forgetPassword = async ({ email }) => {
   try {
-    const response = await axios.post("/users/password/forget", {
-  email
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await axios.post(
+      "/users/password/forget",
+      {
+        email,
       },
-      withCredentials: true,
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.log("forgetPassword", error);
@@ -82,3 +86,38 @@ export const resetPassword = async ({ password, confirmPassword, token }) => {
   }
 };
 
+export const toggleFollow = async (userId, token) => {
+  try {
+    const res = await axios.patch(
+      `follow/${userId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.error("Error toggling follow:", error);
+    return { success: false, message: "Something went wrong" };
+  }
+};
+
+export const getFollows = async (userId) => {
+  try {
+    const res = await axios.get(`/followers/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching follow status:", error);
+    return { success: false, message: "Unable to fetch follow status" };
+  }
+};

@@ -21,11 +21,18 @@ import {
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/context/useAuth";
 
 export const Navbar = () => {
   const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    navigate("/auth/signin");
+  };
 
   const navItems = [
     { to: "/home", icon: <Home className="h-4 w-4" />, label: "Home" },
@@ -34,7 +41,11 @@ export const Navbar = () => {
       icon: <Users className="h-4 w-4" />,
       label: "Employees",
     },
-    { to: "/posts/jobs", icon: <Briefcase className="h-4 w-4" />, label: "Jobs" },
+    {
+      to: "/posts/jobs",
+      icon: <Briefcase className="h-4 w-4" />,
+      label: "Jobs",
+    },
     {
       to: "/messages",
       icon: <MessageSquare className="h-4 w-4" />,
@@ -90,10 +101,12 @@ export const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link to="/profile">Profile</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/logout">
-                  <LogOut className="h-4 w-4 mr-2" /> Logout
-                </Link>
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="cursor-pointer"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -8,6 +8,9 @@ import LikeButton from "@/components/atoms/LikeButton";
 import CommentForm from "@/components/atoms/CommentForm";
 import { useState } from "react";
 import CommentList from "@/components/atoms/CommentList";
+import FollowButton from "@/components/atoms/FollowButton";
+import FollowersList from "@/components/atoms/FollowersList";
+import CreatePostCard from "@/components/atoms/Navebar/CreatePostCard";
 
 const LinkedInPost = ({ user }) => {
   const { posts, loading, error } = useAllPosts();
@@ -36,6 +39,7 @@ const LinkedInPost = ({ user }) => {
             <p className="text-xs mt-1 text-zinc-400">
               Prayagraj, Uttar Pradesh
             </p>
+
             <div className="px-4 mt-4">
               <CreatePostForm />
             </div>
@@ -44,106 +48,127 @@ const LinkedInPost = ({ user }) => {
 
         {/* Main Feed */}
         <div className="col-span-1 md:col-span-6">
-          {loading ? (
-            <p className="text-center">Loading posts...</p>
-          ) : error ? (
-            <p className="text-center text-red-500">Failed to load posts.</p>
-          ) : posts.length === 0 ? (
-            <p className="text-center">No posts available.</p>
-          ) : (
-            <ul className="space-y-4">
-              {posts.map((post) => (
-                <li
-                  key={post._id}
-                  className="p-4 border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition bg-white dark:bg-zinc-800"
-                >
-                  {console.log("post", post)}
-                  <div className="flex items-start space-x-4">
-                    <Avatar className="mb-3">
-                      <AvatarImage
-                        src={
-                          post.author?.imageUrl ??
-                          "https://github.com/shadcn.png"
-                        }
-                      />
-                      <AvatarFallback>
-                        {post.author?.initials ?? "CN"}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                      <p className="text-sm text-gray-700 dark:text-zinc-200">
-                        <span className="font-bold">
-                          {post.author?.name ?? "Unknown"}
-                        </span>
-                      </p>
-                      <h3 className="text-lg sm:text-xl font-bold text-black dark:text-white">
-                        {post.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-zinc-300">
-                        {post.content}
-                      </p>
-                      <span className="text-xs text-gray-500 dark:text-zinc-400">
-                        {post.createdAt}
-                      </span>
-                    </div>
-                  </div>
-                  <Link to={`/posts/${post._id}`}>
-                    {post.imageUrl && (
-                      <img
-                        src={post.imageUrl}
-                        alt="Post"
-                        className="w-full max-h-72 object-cover mt-4 rounded-md"
-                      />
-                    )}
-                  </Link>
+          <CreatePostCard />
+          <div className="mt-4">
+            {loading ? (
+              <p className="text-center">Loading posts...</p>
+            ) : error ? (
+              <p className="text-center text-red-500">Failed to load posts.</p>
+            ) : posts.length === 0 ? (
+              <p className="text-center">No posts available.</p>
+            ) : (
+              <ul className="space-y-4">
+                {posts.map((post) => (
+                  <li
+                    key={post._id}
+                    className="p-4 border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition bg-white dark:bg-zinc-800"
+                  >
+                    {/* {console.log("post", post)} */}
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between sm:space-x-4 p-4 border rounded-md">
+                      {/* Left Section: Avatar + Post Info */}
+                      <div className="flex space-x-4">
+                        <div className="flex-shrink-0">
+                          <Avatar className="mb-3">
+                            <AvatarImage
+                              src={
+                                post.author?.imageUrl ??
+                                "https://github.com/shadcn.png"
+                              }
+                            />
+                            <AvatarFallback>
+                              {post.author?.initials ?? "CN"}
+                            </AvatarFallback>
+                          </Avatar>
+                        </div>
 
-                  <div className="mt-4 flex flex-col gap-2 bg-gray-100 w-full p-4 border rounded-md  ">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-500 dark:text-zinc-400">
-                        {post.likes?.length || 0} likes
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-6 text-gray-500 dark:text-zinc-400 border-t pt-0 ">
-                      <LikeButton
-                        postId={post._id}
-                        isLiked={post.likes?.includes(user?._id)}
-                      />
-                      <div className="border p-0 rounded mb-0">
-                        <button
-                          onClick={handleOpenComment}
-                          className="hover:text-blue-600 transition mt-0"
-                        >
-                          💬 Comment
-                        </button>
+                        <div className="flex flex-col">
+                          <p className="text-sm text-gray-700 dark:text-zinc-200">
+                            <span className="font-bold">
+                              {post.author?.name ?? "Unknown"}
+                            </span>
+                          </p>
+                          <h3 className="text-lg sm:text-xl font-bold text-black dark:text-white">
+                            {post.title}
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-zinc-300">
+                            {post.content}
+                          </p>
+                          <span className="text-xs text-gray-500 dark:text-zinc-400">
+                            {post.createdAt}
+                          </span>
+                        </div>
                       </div>
-                      {/* <BookmarkButton
+
+                      {/* Right Section: Follow Button (only if not own post) */}
+                      {user?._id !== post.author?._id && (
+                        <div className="mt-4 sm:mt-0 sm:self-start">
+                          <FollowButton
+                            userId={post.author?._id}
+                            initiallyFollowing={post.author?.followers?.includes(
+                              user?._id
+                            )}
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <Link to={`/posts/${post._id}`}>
+                      {post.imageUrl && (
+                        <img
+                          src={post.imageUrl}
+                          alt="Post"
+                          className="w-full max-h-72 object-cover mt-4 rounded-md"
+                        />
+                      )}
+                    </Link>
+
+                    <div className="mt-4 flex flex-col gap-2 bg-gray-100 w-full p-4 border rounded-md  ">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-500 dark:text-zinc-400">
+                          {post.likes?.length || 0} likes
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-6 text-gray-500 dark:text-zinc-400 border-t pt-0 ">
+                        <LikeButton
+                          postId={post._id}
+                          isLiked={post.likes?.includes(user?._id)}
+                        />
+                        <div className="border p-0 rounded mb-0">
+                          <button
+                            onClick={handleOpenComment}
+                            className="hover:text-blue-600 transition mt-0"
+                          >
+                            💬 Comment
+                          </button>
+                        </div>
+                        {/* <BookmarkButton
                         postId={post._id}
                         isBookmarked={post.bookmarks?.includes(user?._id)}
                       />{" "}
                        */}
+                      </div>
+                      <div>
+                        {showCommentForm && (
+                          <CommentForm
+                            postId={post._id}
+                            onCommentAdded={(comment) => {
+                              // Optional: do something when comment added
+                              setShowCommentForm(false); // auto-close if you want
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <h6 className="font-semibold">Comments:</h6>
+                        <CommentList postId={post._id} />
+                      </div>
                     </div>
-                    <div>
-                      {showCommentForm && (
-                        <CommentForm
-                          postId={post._id}
-                          onCommentAdded={(comment) => {
-                            // Optional: do something when comment added
-                            setShowCommentForm(false); // auto-close if you want
-                          }}
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <h6 className="font-semibold">Comments:</h6>
-                       <CommentList postId={post._id} />
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <div className="mt-4 flex justify-between items-center">
             <LikeButton
               postId={posts._id}

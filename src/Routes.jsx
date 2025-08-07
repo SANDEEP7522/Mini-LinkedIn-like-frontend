@@ -11,6 +11,7 @@ import { Home } from "./pages/Home/Home";
 import PostDetails from "./components/organisms/posts/postDetails";
 import EditPostPage from "./components/organisms/posts/EditPostPage";
 import JobsPage from "./components/organisms/jobes/JobsPage";
+import FollowersList from "./components/atoms/FollowersList";
 
 export const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
         <Route path="/posts/:id" element={<PostDetails />} />
         <Route path="/posts/edit/:postId" element={<EditPostPage />} />
         <Route path="/posts/jobs" element={<JobsPage />} />
+        <Route path="/followersList" element={<FollowersList />} />
 
 
         <Route path="/*" element={<NotFound />} />
